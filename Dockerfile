@@ -68,6 +68,7 @@ RUN apt-get update \
  mapnik-utils \
  npm \
  osm2pgsql \
+ osmctools \
  osmium-tool \
  osmosis \
  postgresql-$PG_VERSION \
