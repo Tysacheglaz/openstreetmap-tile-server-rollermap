@@ -76,10 +76,10 @@ if [ "$1" == "import" ]; then
         echo "INFO: Download PBF file: $DOWNLOAD_PBF"
         if [ -f /data/region.poly ]; then
             wget ${WGET_ARGS:-} "$DOWNLOAD_PBF" -O - | osmconvert - -B=/data/region.poly -o=/data/region.osm.pbf
-            chown renderer: /data/region.osm.pbf
         else
             wget ${WGET_ARGS:-} "$DOWNLOAD_PBF" -O /data/region.osm.pbf
         fi
+        chown renderer: /data/region.osm.pbf
     fi
 
     if [ "${UPDATES:-}" == "enabled" ] || [ "${UPDATES:-}" == "1" ]; then
