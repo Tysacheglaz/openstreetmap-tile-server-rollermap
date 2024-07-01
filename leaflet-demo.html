@@ -9,6 +9,8 @@
         <link rel="stylesheet" href="leaflet.css"/>
         <script src="leaflet.js"></script>
         <script src="https://rawgit.com/MarcChasse/leaflet.Permalink/master/leaflet.permalink.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
 
         <style>
             html, body, #map {
@@ -37,6 +39,35 @@
             }).addTo(map);
             L.Permalink.setup(map);
             map.attributionControl.setPrefix(false);
+
+            var editableLayers = new L.FeatureGroup();
+            map.addLayer(editableLayers);
+
+            var options = {
+                position: 'topleft',
+                draw: {
+                    polyline: {
+                        shapeOptions: {
+                            color: '#f357a1',
+                            weight: 10
+                        }
+                    },
+                    polygon: false,
+                    circle: false,
+                    rectangle: false,
+                    marker: false
+                },
+                edit: {
+                    featureGroup: editableLayers,
+                    remove: remove
+                }
+            };
+            var drawControl = new L.Control.Draw(options);
+            map.addControl(drawControl);
+
+            map.on(L.Draw.Event.CREATED, function (e) {
+                editableLayers.addLayer(e.layer);
+            });
         </script>
     </body>
 </html>
