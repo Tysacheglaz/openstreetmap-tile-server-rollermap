@@ -26,6 +26,9 @@
         <div id="map"></div>
 
         <script>
+            if(!window.location.hash)
+                window.location.hash='#56.8333,60.60853,15z';
+
             var mappos = L.Permalink.getMapLocation();
             var map = L.map('map', {
                 center: mappos.center,
