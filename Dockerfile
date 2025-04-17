@@ -119,6 +119,8 @@ RUN cd /var/www/html/ \
 && wget https://github.com/Leaflet/Leaflet/releases/download/v1.8.0/leaflet.zip \
 && unzip leaflet.zip \
 && rm leaflet.zip
+# copy local js libs 
+COPY *.js /var/www/html/
 
 # Icon
 RUN wget -O /var/www/html/favicon.ico https://www.openstreetmap.org/favicon.ico
