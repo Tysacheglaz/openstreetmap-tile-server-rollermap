@@ -137,7 +137,8 @@ RUN chmod +x /usr/bin/openstreetmap-tiles-update-expire.sh \
 COPY postgresql.custom.conf.tmpl /etc/postgresql/$PG_VERSION/main/
 RUN chown -R postgres:postgres /var/lib/postgresql \
 && chown postgres:postgres /etc/postgresql/$PG_VERSION/main/postgresql.custom.conf.tmpl \
-&& sed -i 's/\(^host.*\)scram-sha-256$/\1md5/' /etc/postgresql/$PG_VERSION/main/pg_hba.conf
+&& sed -i 's/\(^host.*\)scram-sha-256$/\1md5/' /etc/postgresql/$PG_VERSION/main/pg_hba.conf \
+&& sed -i 's|127\.0\.0\.1/32|0.0.0.0/0|' /etc/postgresql/$PG_VERSION/main/pg_hba.conf
 
 # Create volume directories
 RUN mkdir -p /run/renderd/ \
