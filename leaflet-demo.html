@@ -11,14 +11,17 @@
 <!--
         <script src="https://npmcdn.com/leaflet@1.0.0-rc.1/dist/leaflet.js"></script>
         <script src="https://rawgit.com/MarcChasse/leaflet.Permalink/master/leaflet.permalink.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.81.1/dist/L.Control.Locate.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.81.1/dist/L.Control.Locate.min.css" rel="stylesheet">
 -->
         <script src="leaflet.permalink.min.js"></script>
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.81.1/dist/L.Control.Locate.min.js"></script>
-        <link href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.81.1/dist/L.Control.Locate.min.css" rel="stylesheet">
+        <script src="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
 
         <style>
             html, body, #map {
@@ -80,29 +83,12 @@
                 editableLayers.addLayer(e.layer);
             });
 
-            map.on('locationfound', function(e){
-                var marker = L.marker([e.latitude, e.longitude]).bindPopup('Your are here :)');
-                var circle = L.circle([e.latitude, e.longitude], e.accuracy/2, {
-                    weight: 1,
-                    color: 'blue',
-                    fillColor: '#cacaca',
-                    fillOpacity: 0.2
-                });
-                map.addLayer(marker);
-                map.addLayer(circle);
-            })
-           .on('locationerror', function(e){
-                console.log(e);
-                alert("Location access denied.");
-            });
-
-            lc = L.control
-              .locate({
-                strings: {
-                  title: "Show me where I am, yo!"
+            L.control.locate({
+                position: 'topleft',
+                locateOptions: {
+                    enableHighAccuracy: true,
                 }
-              })
-              .addTo(map);
+            }).addTo(map);
 
         </script>
     </body>
